@@ -10,4 +10,10 @@ def handler(event, context):
   except requests.exceptions.RequestException as e:
     print(e)
   else:
-    print(res)
+    print(json.dumps(res.json(), indent=2))
+
+
+if __name__ == '__main__':
+  event = {}
+  context = {}
+  handler(event, context)
