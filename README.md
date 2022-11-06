@@ -67,14 +67,14 @@ Run `terraform apply` to execute the Terraform configurations; enter `yes` to co
 #### aws/awslocal CLI
 With the Lambda deployed to LocalStack, you must now `invoke` it via the CLI as there is no freely available UI utility.
 
-To interact with LocalStack via the CLI, simply append `local` to the `aws` CLI command. For example, to view the list of S3 buckets in LocalStack, run `awslocal s3 ls`; there shouldn't be any.
+To interact with LocalStack via the CLI, simply append `local` to the `aws` CLI command and include the endpoint. For example, to view the list of S3 buckets in LocalStack, run `awslocal --endpoint-url=http://localstack:4566 s3 ls`; there shouldn't be any.
 
-To invoke the Lambda, run `awslocal lambda invoke --function-name ExampleTfAWSLambda response.json`.
+To invoke the Lambda, run `awslocal --endpoint-url=http://localstack:4566 lambda invoke --function-name ExampleTfAWSLambda response.json`.
 
 The Lambda prints the randomly returned user to CloudWatch. To view the data, run:
 
 ```bash
-awslocal logs get-log-events --log-group-name /aws/lambda/ExampleTfAWSLambda --log-stream-name $(awslocal logs describe-log-streams --log-group-name /aws/lambda/ExampleTfAWSLambda --order-by LastEventTime --query logStreams[].logStreamName --max-items 1 --descending --output text | head -n 1)
+awslocal --endpoint-url=http://localstack:4566 logs get-log-events --log-group-name /aws/lambda/ExampleTfAWSLambda --log-stream-name $(awslocal --endpoint-url=http://localstack:4566 logs describe-log-streams --log-group-name /aws/lambda/ExampleTfAWSLambda --order-by LastEventTime --query logStreams[].logStreamName --max-items 1 --descending --output text | head -n 1)
 ````
 
 #### Tear down
