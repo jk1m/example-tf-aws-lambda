@@ -117,4 +117,4 @@ aws logs get-log-events --log-group-name /aws/lambda/ExampleTfAWSLambda --log-st
   - Click on the Log Group, `/aws/lambda/ExampleTfAWSLambda`
   - Click on the Log stream
 
-To tear everything down, simply run `terraform apply -var "use_localstack=false"`; enter `yes` to confirm.
+To tear everything down, simply run `terraform destroy -var "use_localstack=false"`; enter `yes` to confirm.
