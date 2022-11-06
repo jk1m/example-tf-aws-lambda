@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:0.14.2
+    environment: 
+      - LAMBDA_EXECUTOR=docker_reuse
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - ENFORCE_IAM=1 # hoping localstack will enable this for the free version
+    ports:
+      - "4566:4566"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
